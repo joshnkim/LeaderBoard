@@ -15,5 +15,8 @@
     "stop_production": "npx forever stop reactServer.cjs",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.1.2"
   }
 }

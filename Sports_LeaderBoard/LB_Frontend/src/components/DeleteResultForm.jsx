@@ -11,8 +11,6 @@ const DeleteResultForm = ({ athletes, results = [], backendURL, refreshData }) =
 
     const handleDelete = async () => {
         const confirm = window.confirm("Are you sure you want to delete this result?")
-        const result = results.find((r) => r.ResultID === parseInt(selectedID)) // added this to allow for athlete name to show up in message dialogue
-        const athlete = athletes.find((a) => a.AthleteID === result.AthleteID);  // added this to allow for athlete name to show up in message dialogue
         if (!confirm) return;
         
         try {
@@ -22,7 +20,7 @@ const DeleteResultForm = ({ athletes, results = [], backendURL, refreshData }) =
 
             if (response.ok) {
                 setSelectedID('')
-                window.alert(`Result For athlete ${athlete["First Name"]} ${athlete["Last Name"]} was delete successfully.`)
+                window.alert(`Result was delete successfully.`)
                 refreshData();
                 navigate('/')
 

@@ -106,7 +106,7 @@ CREATE PROCEDURE sp_createAthlete(
 
 BEGIN 
 
-    INSERT INTO Athletes ( FName, LName, Age, Gender, Country)								-- AthleteID is an auto-incremented value, so not included
+    INSERT INTO Athletes ( FName, LName, Age, Gender, Country)                              -- AthleteID is an auto-incremented value, so not included
     VALUES
     (fnameInput, lnameInput, ageInput, genderInput, countryInput);
 
@@ -206,7 +206,29 @@ BEGIN
 END;
 
 
+-- UPDATE A RESULT
+DROP PROCEDURE IF EXISTS sp_updateResult;
 
+CREATE PROCEDURE sp_updateResult(
+    IN resultIDInput INT,
+    IN raceIDInput INT,
+    IN athleteIDInput INT,
+    IN timeInput TIME,
+    IN raceRankInput INT
+)
+
+BEGIN 
+
+    UPDATE Results
+    SET 
+       RaceID = raceIDInput,
+       AthleteID = athleteIDInput,
+       Time = timeInput,
+       RaceRank = raceRankInput
+    WHERE ResultID = resultIDinput;
+
+END;
+-- ---------------------------------------------------------------------------------------------------------------
 
 
 
@@ -270,3 +292,8 @@ BEGIN
 
 END; 
 -- ---------------------------------------------------------------------------------------------------------------
+
+
+
+
+

@@ -1,3 +1,4 @@
+
 /*
     SETUP
 */
@@ -134,18 +135,19 @@ app.get('/events/:eventId/races', async (req, res) => {
     try {
       const query = `
         SELECT 
-	        Athletes.AthleteID, 
+          Athletes.AthleteID, 
           CONCAT(Athletes.Fname, ' ', Athletes.Lname) AS 'Name', 
           CONCAT(Races.Discipline, ' ', Races.Distance, 'km') AS 'Race',
+          Races.RaceID,
           Time,
           CONCAT(RaceRank,
-		        CASE
-			        WHEN RaceRank %100 BETWEEN 11 AND 13 THEN 'th' 				-- this covers 11, 12, and 13 which dont follow the conventional suffix rule
-			        WHEN RaceRank %10 = 1 THEN 'st' 												--
-              WHEN RaceRank %10 = 2 THEN 'nd'											 	--
-              WHEN RaceRank %10 = 3 THEN 'rd'												-- this line and the above 2 work for numbers starting from 1-9 and 14 and on. need to add a condition for 11,12, 13
+            CASE
+              WHEN RaceRank %100 BETWEEN 11 AND 13 THEN 'th'        -- this covers 11, 12, and 13 which dont follow the conventional suffix rule
+              WHEN RaceRank %10 = 1 THEN 'st'                         --
+              WHEN RaceRank %10 = 2 THEN 'nd'                       --
+              WHEN RaceRank %10 = 3 THEN 'rd'                       -- this line and the above 2 work for numbers starting from 1-9 and 14 and on. need to add a condition for 11,12, 13
               ELSE 'th'
-		        END, 
+            END, 
             ' place') AS 'Rank',
           ResultID
         FROM Results
@@ -376,6 +378,33 @@ app.patch('/athletes/:athleteID', async (req, res) => {
   }
 })
 
+//UPDATE: result
+app.patch('/results/:resultID', async (req, res) => {
+  const {raceID, athleteID, time, rank} = req.body; 
+
+  const resultID = req.params.resultID;
+
+  console.log(`Updating result with ID: ${resultID}`);
+  console.log(`New values - raceID: ${raceID}, athleteID: ${athleteID}, time: ${time}, rank: ${rank}`);
+
+  try {
+    await db.query('CALL sp_updateResult(?, ?, ?, ?, ?)', [
+      resultID,
+      raceID,
+      athleteID,
+      time,
+      rank
+    ]);
+
+    res.status(200).json({ message: 'Result updated successfully!' });
+
+  } catch (error) {
+    console.error("Error calling sp_updateResult:", error); // Helpful for debugging
+    res.status(500).send("An error occurred while updating the result.");
+  }
+})
+
+
 
 /*******************************************************************************************************************************/
 
@@ -477,3 +506,4 @@ app.listen(PORT, async function(){            // This is the basic syntax for wh
 
     await loadSP();
 });
+
