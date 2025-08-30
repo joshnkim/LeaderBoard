@@ -54,6 +54,8 @@ USAGE:
 9. The "Reset Database" Button on the Home Screen will allow the user to wipe everything from the database and insert the initial smaple data. This was included as an aspect of the app in order to support testing the database and its functionalities. 
 
 
+
+
 SCREENSHOTS: 
 
 <img width="668" height="592" alt="Screenshot 2025-08-29 at 8 08 05 PM" src="https://github.com/user-attachments/assets/7e7a0c1c-8481-4bc5-8ccc-96e8fae41a1a" />
@@ -75,6 +77,8 @@ SCREENSHOTS:
 <img width="682" height="261" alt="Screenshot 2025-08-29 at 8 10 35 PM" src="https://github.com/user-attachments/assets/d222e721-8ffb-438f-88dd-28b3252f3ce4" />
 <img width="696" height="424" alt="Screenshot 2025-08-29 at 8 10 42 PM" src="https://github.com/user-attachments/assets/968ab105-4d84-43f9-9198-bc74b9de148f" />
 <img width="698" height="316" alt="Screenshot 2025-08-29 at 8 10 49 PM" src="https://github.com/user-attachments/assets/24fdce5b-7af9-4546-9bc3-e3d52ab26262" />
+
+
 
 FUTURE IMPROVEMENTS: 
 - N/A
